@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <Form @submitForm="onFormSubmit"/>
+        <Form :total="totalBalance" @submitForm="onFormSubmit"/>
         <TotalBalance :total="totalBalance"/>
-        <BudgetList :list="list" @deleteItem="onDeleteItem"/>
+        <BudgetList :list="list" @deleteItemParent="deleteItemParent" />
 
     </div>
 </template>
@@ -41,20 +41,29 @@
         computed: {
             totalBalance() {
                 return Object.values(this.list).reduce((acc, item) => acc + item.value, 0);
+
             }
         },
         methods: {
-            onDeleteItem(id) {
-                this.$delete(this.list, id)
+            deleteItemParent(id) {
+                const i = confirm('удалить?');
+                if (i){
+                    this.$delete(this.list, id);
+                }
             },
             onFormSubmit(data) {
+                console.log(typeof data.value);
+                if (data.type === 'OUTCOME' && data.value[0] !== '-' ){
+
+                    data.value = Number(`-${data.value}`);
+                }
+
                 const newObj = {
                     ...data,
                     id: String(Math.random())
                 };
-                this.$set(this.list, newObj.id, newObj)
-            }
-
+                this.$set(this.list, newObj.id, newObj);
+            },
         }
     }
 </script>

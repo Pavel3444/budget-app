@@ -41,26 +41,37 @@
                 ]
             }
         }),
+        props: {
+            total: {
+                type: Number,
+                default: 0
+            }
+        },
         methods: {
-            onSubmit(){
-this.$refs.addItemForm.validate(valid => {
-   console.log(valid);
-   if (valid){
-      this.$emit('submitForm', {...this.formData});
-      this.$refs.addItemForm.resetFields();
-   }
-});
+            onSubmit() {
+                this.$refs.addItemForm.validate(valid => {
+                    // console.log(valid);
+                    if (valid) {
+                        this.$emit('submitForm', {...this.formData});
+                        this.$refs.addItemForm.resetFields();
+                    }
+                });
+                setTimeout( () => {
+                    const sumBlock = document.querySelector('.total-value');
+                   this.total > 0 ? sumBlock.style.color = "green" : this.total < 0 ? sumBlock.style.color = "red" : sumBlock.style.color = "black";
+                    }, 100 )
             }
         }
     }
 </script>
 
 <style scoped>
-.formCard{
-    max-width: 500px;
-    margin: auto;
-}
-    .type-select{
+    .formCard {
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .type-select {
         width: 100%;
     }
 </style>

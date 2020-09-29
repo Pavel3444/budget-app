@@ -1,6 +1,6 @@
 <template>
     <div class="total-value">
-Balance: {{total}}
+        Balance: {{total}}
     </div>
 </template>
 
@@ -8,19 +8,19 @@ Balance: {{total}}
     export default {
         name: "TotalBalance",
         props: {
-            total:{
+            total: {
                 type: Number,
                 default: 0
             }
-        }
+        },
     }
 </script>
 
 <style scoped>
-.total-value{
-    font-size: 26px;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 20px;
-}
+    .total-value {
+        font-size: 26px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 20px;
+    }
 </style>
